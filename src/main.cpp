@@ -50,7 +50,6 @@ void os_getArtEui (u1_t* buf) { }
 void os_getDevEui (u1_t* buf) { }
 void os_getDevKey (u1_t* buf) { }
 
-//static uint8_t mydata[] = { 0x00, 0xff, 0x00, 0xff,0x00, 0xff, 0x00, 0xff };
 static uint8_t mydata[6];
 static osjob_t sendjob;
 
@@ -214,7 +213,6 @@ void loop() {
     
     float celsius =  bme.getTemperature();
     float pressure = bme.getPressure() / 100.0F;
-    pressure * 100;
     float humaidity = bme.getHumidity();
     
     //translate float value to int 16 bit *100 get rid of the .
@@ -239,10 +237,6 @@ void loop() {
     mydata[4] = (humidity >> 8) & 0xFF;
     mydata[5] = humidity & 0xFF;
 
-    for ( int i = 0; i < 6; i++) {
-        Serial.print(mydata[i], HEX);
-        Serial.print(" ");
-    }
 
     // Start job
     do_send(&sendjob);
